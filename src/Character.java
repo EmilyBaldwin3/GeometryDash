@@ -21,7 +21,39 @@ public class Character {
         rec = new Rectangle (xpos, ypos, width, height);
     }
     // move method
+    public void move() {
+
+        /**These are controlling movement based on key listener booleans*/
+        if (up == true) {
+            ypos = ypos - dy;
+        } else if (down == true){
+            ypos = ypos + dy;
+        }
+        if (right == true){
+            xpos = xpos + dx;
+        } else if (left == true){
+            xpos = xpos -dx;
+        }
+
+        /**These are keeping the object on the screen by bouncing off the walls */
+        if (ypos < 0) {
+            dy=-dy;
+        }
+        //bottom
+        if (ypos > 700-height) {
+            dy=-dy;
+        }
+        //right side
+        if (xpos < 0) {
+           dx=-dx;
+        }
+        //left side
+        if (xpos > 1000-width){
+            dx=-dx;
+        }
 
 
-
+        rec = new Rectangle(xpos,ypos,width,height);
+    } // end of the method
 }
+

@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fb68fdb-7f40-4d29-940d-7021e08127c7" name="Changes" comment="first checkpoint of the game project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YellowImage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BasicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BasicGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoundFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoundFile.java" afterDir="false" />
-    </list>
+    <list default="true" id="8fb68fdb-7f40-4d29-940d-7021e08127c7" name="Changes" comment="second checkpoint of the game project / saving my work" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,12 +75,21 @@
       <option name="project" value="LOCAL" />
       <updated>1709061702803</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="second checkpoint of the game project / saving my work">
+      <option name="closed" value="true" />
+      <created>1709740809172</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709740809172</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first checkpoint of the game project" />
-    <option name="LAST_COMMIT_MESSAGE" value="first checkpoint of the game project" />
+    <MESSAGE value="second checkpoint of the game project / saving my work" />
+    <option name="LAST_COMMIT_MESSAGE" value="second checkpoint of the game project / saving my work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

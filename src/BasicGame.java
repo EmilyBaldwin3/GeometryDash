@@ -28,7 +28,7 @@ public class BasicGame implements Runnable,KeyListener {
     public Image SquareImage;
     public Image TriangleImage;
     public Image YellowImage2;
-   //public Obstacle Square;
+   // public Obstacle Square;
   //  public Obstacle Triangle;
     /***
      * step 1 for squares array
@@ -116,18 +116,9 @@ public class BasicGame implements Runnable,KeyListener {
         //draw the images
         g.drawImage(BackgroundImage, 0,0,WIDTH,HEIGHT,null);
         g.drawImage(YellowImage2,Yellow.xpos,Yellow.ypos,Yellow.width,Yellow.height,null);
-      //  g.drawImage(TriangleImage,Triangle.xpos,Triangle.ypos,Triangle.width,Triangle.height,null);
-      //  g.drawImage(SquareImage,Square.xpos,Square.ypos,Square.width,Square.height,null);
 
-        // draw hit boxes
-        // g.setColor(Color.RED);
-        //  g.drawRect(orange.xpos, orange.ypos,orange.width,orange.height);
         g.setColor(Color.blue);
         g.drawRect(Yellow.rec.x,Yellow.rec.y,Yellow.rec.width,Yellow.rec.height);
-      //  g.setColor(Color.green);
-      //  g.drawRect(Triangle.rec.x,Triangle.rec.y,Triangle.rec.width,Triangle.rec.height);
-      //  g.setColor(Color.green);
-      //  g.drawRect(Square.rec.x,Square.rec.y,Square.rec.width,Square.rec.height);
 
         for (int x=0; x<=7;x++){
             if (squares[x].isAlive == true){

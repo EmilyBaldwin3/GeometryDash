@@ -16,6 +16,7 @@ public class Obstacle {
     public boolean down;
     public boolean right;
     public boolean left;
+    public boolean hasBeenTouched = false;
 
     public Obstacle (String paramName, int paramXpos, int paramYpos){
         name = paramName;
@@ -34,7 +35,7 @@ public class Obstacle {
             ypos=0;
         }
         if (xpos < 0){
-            xpos=1500;
+            xpos=5600;
         }
         //if (xpos > 1000-width){
         //    xpos=0;

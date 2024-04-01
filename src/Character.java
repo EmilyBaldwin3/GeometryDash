@@ -13,6 +13,7 @@ public class Character {
     public boolean down;
     public boolean right;
     public boolean left;
+    public int points = 0;
 
     public Character (String paramName, int paramXpos, int paramYpos){
         name = paramName;

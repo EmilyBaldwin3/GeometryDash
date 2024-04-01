@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fb68fdb-7f40-4d29-940d-7021e08127c7" name="Changes" comment="second checkpoint of the game project / saving my work">
+    <list default="true" id="8fb68fdb-7f40-4d29-940d-7021e08127c7" name="Changes" comment="saving work">
+      <change afterPath="$PROJECT_DIR$/src/testing.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BasicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BasicGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Obstacle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +42,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.testing">
     <configuration name="BasicGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BasicGame" />
       <module name="GeometryDash" />
@@ -47,8 +50,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="testing" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="testing" />
+      <module name="GeometryDash" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.testing" />
         <item itemvalue="Application.BasicGame" />
       </list>
     </recent_temporary>
@@ -94,13 +105,22 @@
       <option name="project" value="LOCAL" />
       <updated>1709740872867</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="saving work">
+      <option name="closed" value="true" />
+      <created>1709817692570</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709817692570</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first checkpoint of the game project" />
     <MESSAGE value="second checkpoint of the game project / saving my work" />
-    <option name="LAST_COMMIT_MESSAGE" value="second checkpoint of the game project / saving my work" />
+    <MESSAGE value="saving work" />
+    <option name="LAST_COMMIT_MESSAGE" value="saving work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

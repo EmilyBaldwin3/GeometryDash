@@ -89,11 +89,11 @@ public class testing implements Runnable, KeyListener {
 
     public void placeObstacles() {
         for(int x=0;x<squares.length;x++){
-            squares[x] = new Obstacle ("squares",x*800,600);
+            squares[x] = new Obstacle ("squares",x*600+(int)(Math.random()*800),600);
             squares[x].pic = Toolkit.getDefaultToolkit().getImage("SquareImage.png");
         }
         for(int x=0;x<triangles.length;x++){
-            triangles[x] = new Obstacle ("triangles",100+x*800,600);
+            triangles[x] = new Obstacle ("triangles",100+x*600,600);
             triangles[x].pic = Toolkit.getDefaultToolkit().getImage("TriangleImage.png");
             for (int y=0; y<squares.length; y++) {
                 if (triangles[x].rec.intersects(squares[y].rec)) {
@@ -164,7 +164,7 @@ public class testing implements Runnable, KeyListener {
                 if (squares[x].isAlive == true){
                     g.setColor(Color.green);
                     g.drawRect(squares[x].rec.x,squares[x].rec.y,squares[x].rec.width,squares[x].rec.height);
-                    g.drawString(""+x, squares[x].xpos, squares[x].ypos);
+                 //   g.drawString(""+x, squares[x].xpos, squares[x].ypos);
 
                 }
             }
@@ -177,9 +177,15 @@ public class testing implements Runnable, KeyListener {
                 if (triangles[x].isAlive == true){
                     g.setColor(Color.green);
                     g.drawRect(triangles[x].rec.x,triangles[x].rec.y,triangles[x].rec.width,triangles[x].rec.height);
-                    g.drawString(""+x, triangles[x].xpos, triangles[x].ypos);
+                   // g.drawString(""+x, triangles[x].xpos, triangles[x].ypos);
                 }
             }
+
+            g.setColor(Color.black);
+            g.setFont(new Font("Times New Roman", Font.BOLD, 25));
+            g.drawString("Square Points: " + Yellow.points, 650,100);
+            // tally point keeper on screen
+
         } // game play - what I currently have in my render
 
         else if (Yellow.points>=5) {
@@ -222,6 +228,7 @@ public class testing implements Runnable, KeyListener {
         for (int x = 0; x < squares.length; x++){
             if (Yellow.rec.intersects(squares[x].rec)){
                 Yellow.ypos=squares[x].ypos -90;
+                Yellow.rec.y = squares[x].ypos-90;
                 if (squares[x].hasBeenTouched == false) {
                     Yellow.points++;
                     System.out.println("Point!");
@@ -288,12 +295,12 @@ public class testing implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
-        if (keyCode == 38) {
-            Yellow.up = true;
-        } //up
-        if (keyCode == 40) {
-            Yellow.down = true;
-        }//down
+//        if (keyCode == 38) {
+//            Yellow.up = true;
+//        } //up
+//        if (keyCode == 40) {
+//            Yellow.down = true;
+//        }//down
         if (keyCode == 37) {
             Yellow.left = true;
 
@@ -306,6 +313,10 @@ public class testing implements Runnable, KeyListener {
         if(gamePlaying == false && keyCode == 32){
             gamePlaying = true;
         }
+        if (keyCode == 32 && Yellow.jumps <3){ // space bar
+            Yellow.dy= -20;
+            Yellow.jumps++;
+        }
     }
 
     @Override
@@ -314,14 +325,14 @@ public class testing implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
-        if (keyCode == 38) {
-            //orange.dy=0;
-            Yellow.up = false;
-        } //up
-        if (keyCode == 40) {
-            // orange.dy=0;
-            Yellow.down = false;
-        }//down
+//        if (keyCode == 38) {
+//            //orange.dy=0;
+//            Yellow.up = false;
+//        } //up
+//        if (keyCode == 40) {
+//            // orange.dy=0;
+//            Yellow.down = false;
+//        }//down
         if (keyCode == 37) {
             // orange.dx = 0;
             Yellow.left = false;

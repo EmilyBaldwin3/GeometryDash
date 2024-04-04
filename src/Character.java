@@ -6,7 +6,7 @@ public class Character {
     public int height = 90;
     public int width = 90;
     public String name = "Yellow";
-    public int dx = 2;
+    public int dx = 3;
     public int dy = 2;
     public Rectangle rec;
     public boolean up;
@@ -14,6 +14,7 @@ public class Character {
     public boolean right;
     public boolean left;
     public int points = 0;
+    public int jumps = 0;
 
     public Character (String paramName, int paramXpos, int paramYpos){
         name = paramName;
@@ -24,12 +25,13 @@ public class Character {
     // move method
     public void move() {
 
+
         /**These are controlling movement based on key listener booleans*/
-        if (up == true) {
-            ypos = ypos - dy;
-        } else if (down == true){
-            ypos = ypos + dy;
-        }
+//        if (up == true) {
+//            ypos = ypos - dy;
+//        } else if (down == true){
+//            ypos = ypos + dy;
+//        }
         if (right == true){
             xpos = xpos + dx;
         } else if (left == true){
@@ -37,13 +39,13 @@ public class Character {
         }
 
         /**These are keeping the object on the screen by bouncing off the walls */
-        if (ypos < 0) {
-            dy=-dy;
-        }
-        //bottom
-        if (ypos > 700-height) {
-            dy=-dy;
-        }
+//        if (ypos < 0) {
+//            dy=-dy;
+//        }
+//        //bottom
+//        if (ypos > 700-height) {
+//            dy=-dy;
+//        }
         //right side
         if (xpos < 0) {
            dx=-dx;
@@ -52,6 +54,14 @@ public class Character {
         if (xpos > 1000-width){
             dx=-dx;
         }
+
+        ypos = ypos + dy;
+        dy = dy + 1;
+        if (ypos > 600){
+            ypos = 600;
+            jumps = 0;
+        }
+
 
 
         rec = new Rectangle(xpos,ypos,width,height);

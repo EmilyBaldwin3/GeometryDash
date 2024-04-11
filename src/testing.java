@@ -89,11 +89,11 @@ public class testing implements Runnable, KeyListener {
 
     public void placeObstacles() {
         for(int x=0;x<squares.length;x++){
-            squares[x] = new Obstacle ("squares",x*600+(int)(Math.random()*800),600);
+            squares[x] = new Obstacle ("squares",x*600+(int)(Math.random()*800+800),600);
             squares[x].pic = Toolkit.getDefaultToolkit().getImage("SquareImage.png");
         }
         for(int x=0;x<triangles.length;x++){
-            triangles[x] = new Obstacle ("triangles",100+x*600,600);
+            triangles[x] = new Obstacle ("triangles",825+x*600,600);
             triangles[x].pic = Toolkit.getDefaultToolkit().getImage("TriangleImage.png");
             for (int y=0; y<squares.length; y++) {
                 if (triangles[x].rec.intersects(squares[y].rec)) {
@@ -213,8 +213,9 @@ public class testing implements Runnable, KeyListener {
     public void collisions() {
         for (int x = 0; x < triangles.length; x++) {
             if (Yellow.rec.intersects(triangles[x].rec) && triangles[x].isAlive == true) {
-                Yellow.xpos = 0;
+               // Yellow.xpos = 0;
                 Yellow.points = 0;
+                placeObstacles();
 
                 arcadeActionSound.play();
 //                g.setColor(Color.red);
@@ -301,15 +302,16 @@ public class testing implements Runnable, KeyListener {
 //        if (keyCode == 40) {
 //            Yellow.down = true;
 //        }//down
-        if (keyCode == 37) {
-            Yellow.left = true;
-
-        } //left
-        if (keyCode == 39) {
-            Yellow.right = true;
-        } //right
+//        if (keyCode == 37) {
+//            Yellow.left = true;
+//
+//        } //left
+//        if (keyCode == 39) {
+//            Yellow.right = true;
+//        } //right
 
         // spacebar to start the game
+
         if(gamePlaying == false && keyCode == 32){
             gamePlaying = true;
         }

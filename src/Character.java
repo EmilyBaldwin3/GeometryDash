@@ -56,7 +56,7 @@ public class Character {
         }
 
         ypos = ypos + dy;
-        dy = dy + 1;
+        dy = dy + 1 ;
         if (ypos > 600){
             ypos = 600;
             jumps = 0;

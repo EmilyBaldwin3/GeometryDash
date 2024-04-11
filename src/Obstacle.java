@@ -9,7 +9,7 @@ public class Obstacle {
     public int height = 90;
     public int width = 90;
     public String name;
-    public int dx = -2;
+    public int dx = -3;
     public int dy = 0;
     public Rectangle rec;
     public boolean up;

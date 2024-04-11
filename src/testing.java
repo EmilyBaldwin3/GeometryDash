@@ -1,5 +1,3 @@
-
-
 //Graphics Libraries
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -12,7 +10,6 @@ import javax.swing.JPanel;
 public class testing implements Runnable, KeyListener {
     //Variable Declaration Section
     //Declare the variables used in the program
-    //You can set their initial values too
 
     //Sets the width and height of the program window
     final int WIDTH = 1000;
@@ -35,8 +32,6 @@ public class testing implements Runnable, KeyListener {
     public Image SquareImage;
     public Image TriangleImage;
     public Image YellowImage2;
-    // public Obstacle Square;
-    //  public Obstacle Triangle;
     /**
      * step 1 for squares array
      */
@@ -145,10 +140,19 @@ public class testing implements Runnable, KeyListener {
             g.setColor(Color.red);
             g.setFont(new Font("Times Roman",Font.BOLD,60));
             g.drawString("Press Spacebar to Begin",120,350);
+            g.setColor(Color.blue);
+            g.drawRect(300,450,400,150);
+            g.setFont(new Font("Georgia",Font.BOLD,14));
+            g.drawString("RULES/HOW TO PLAY: press SPACE BAR to JUMP",310,490);
+            g.drawString("(press 2x to jump higher), AVOID triangles,",310,510);
+            g.drawString("LAND ON 5 squares to WIN!!",310,530);
+            g.setFont(new Font("Georgia",Font.BOLD,20));
+            g.drawString("VOLUME ON!",420,580);
         } // start screen
 
         else if(gamePlaying == true && gameOver  == false){
-//draw the images
+
+            //draw the images
             g.drawImage(BackgroundImage, 0,0,WIDTH,HEIGHT,null);
             g.drawImage(YellowImage2,Yellow.xpos,Yellow.ypos,Yellow.width,Yellow.height,null);
 
@@ -164,7 +168,7 @@ public class testing implements Runnable, KeyListener {
                 if (squares[x].isAlive == true){
                     g.setColor(Color.green);
                     g.drawRect(squares[x].rec.x,squares[x].rec.y,squares[x].rec.width,squares[x].rec.height);
-                 //   g.drawString(""+x, squares[x].xpos, squares[x].ypos);
+
 
                 }
             }
@@ -177,7 +181,6 @@ public class testing implements Runnable, KeyListener {
                 if (triangles[x].isAlive == true){
                     g.setColor(Color.green);
                     g.drawRect(triangles[x].rec.x,triangles[x].rec.y,triangles[x].rec.width,triangles[x].rec.height);
-                   // g.drawString(""+x, triangles[x].xpos, triangles[x].ypos);
                 }
             }
 
@@ -197,8 +200,6 @@ public class testing implements Runnable, KeyListener {
             g.drawString("You WIN Game Over", 100, 350);
 
         } // you won screen
-        // background screen that says "you lose"
-        // "press space to play again"
         else {
             // you lost screen
             g.drawString("You LOSE Game Over", 100, 350);
@@ -213,18 +214,12 @@ public class testing implements Runnable, KeyListener {
     public void collisions() {
         for (int x = 0; x < triangles.length; x++) {
             if (Yellow.rec.intersects(triangles[x].rec) && triangles[x].isAlive == true) {
-               // Yellow.xpos = 0;
                 Yellow.points = 0;
                 placeObstacles();
 
                 arcadeActionSound.play();
-//                g.setColor(Color.red);
-//                g.fillRect(0,0,WIDTH,HEIGHT);
-//                g.setColor(Color.yellow);
-//                g.setFont(new Font("Times Roman",Font.BOLD,40));
-//                g.drawString("You LOSE Game Over",100,350);
 
-            } // how do I make this work for when the character lands on top of the triangle and how do i make this intersection only happen once
+            }
         }
         for (int x = 0; x < squares.length; x++){
             if (Yellow.rec.intersects(squares[x].rec)){
@@ -239,13 +234,13 @@ public class testing implements Runnable, KeyListener {
                     gameOver = true;
                 } // win detection
                 System.out.println("yellow points: " + Yellow.points);
-            } // how do I make my character jump / have gravity?
+            }
         }
         for (int x = 0; x < squares.length; x++) {
             if(squares[x].rec.intersects(triangles[x].rec)){
                 triangles[x].isAlive = false;
             }
-        } // how do I get this to work . . . for the triangles to not show up if a square is already there
+        }
     }
 
     public void pause(int time ) { // ** never have to edit **
@@ -296,22 +291,6 @@ public class testing implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
-//        if (keyCode == 38) {
-//            Yellow.up = true;
-//        } //up
-//        if (keyCode == 40) {
-//            Yellow.down = true;
-//        }//down
-//        if (keyCode == 37) {
-//            Yellow.left = true;
-//
-//        } //left
-//        if (keyCode == 39) {
-//            Yellow.right = true;
-//        } //right
-
-        // spacebar to start the game
-
         if(gamePlaying == false && keyCode == 32){
             gamePlaying = true;
         }
@@ -327,14 +306,6 @@ public class testing implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
-//        if (keyCode == 38) {
-//            //orange.dy=0;
-//            Yellow.up = false;
-//        } //up
-//        if (keyCode == 40) {
-//            // orange.dy=0;
-//            Yellow.down = false;
-//        }//down
         if (keyCode == 37) {
             // orange.dx = 0;
             Yellow.left = false;

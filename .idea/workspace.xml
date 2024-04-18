@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fb68fdb-7f40-4d29-940d-7021e08127c7" name="Changes" comment="saving work part 5&#10;&#10;fixed the code so that the character does not move to the side and does not glitch on triangles">
+    <list default="true" id="8fb68fdb-7f40-4d29-940d-7021e08127c7" name="Changes" comment="saving work part 6; game rules screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing.java" afterDir="false" />
     </list>
@@ -142,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712846883129</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="saving work part 6; game rules screen">
+      <option name="closed" value="true" />
+      <created>1712849170056</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712849170056</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -153,7 +161,8 @@
     <MESSAGE value="saving work part 3" />
     <MESSAGE value="saving work part 4&#10;&#10;added gravity" />
     <MESSAGE value="saving work part 5&#10;&#10;fixed the code so that the character does not move to the side and does not glitch on triangles" />
-    <option name="LAST_COMMIT_MESSAGE" value="saving work part 5&#10;&#10;fixed the code so that the character does not move to the side and does not glitch on triangles" />
+    <MESSAGE value="saving work part 6; game rules screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="saving work part 6; game rules screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

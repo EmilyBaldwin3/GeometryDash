@@ -12,10 +12,6 @@ public class Obstacle {
     public int dx = -3;
     public int dy = 0;
     public Rectangle rec;
-    public boolean up;
-    public boolean down;
-    public boolean right;
-    public boolean left;
     public boolean hasBeenTouched = false;
 
     public Obstacle (String paramName, int paramXpos, int paramYpos){
@@ -37,9 +33,6 @@ public class Obstacle {
         if (xpos < 0){
             xpos=5600;
         }
-        //if (xpos > 1000-width){
-        //    xpos=0;
-        //   }
         rec = new Rectangle(xpos,ypos,width,height);
     }
 }

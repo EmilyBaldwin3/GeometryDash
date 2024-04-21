@@ -62,10 +62,6 @@ public class testing implements Runnable, KeyListener {
 
         BackgroundImage = Toolkit.getDefaultToolkit().getImage("BackgroundImage.jpeg");
 
-        //  Triangle = new Obstacle("Triangle", 0, 600);
-        // TriangleImage = Toolkit.getDefaultToolkit().getImage("TriangleImage.png");
-        //  Square = new Obstacle("Square", 300, 600);
-        //  SquareImage = Toolkit.getDefaultToolkit().getImage("SquareImage.png");
 
 /**
  * Step 2 for the squares array: construct
@@ -205,9 +201,6 @@ public class testing implements Runnable, KeyListener {
         } // game play - what I currently have in my render
 
         else if (gameOver == true) {
-            // backgroundMusic.pause();
-            // youWinSound.loop();
-            // you win screen
             g.setColor(Color.green);
             g.fillRect(0, 0, WIDTH, HEIGHT);
             g.setColor(Color.yellow);
@@ -321,11 +314,9 @@ public class testing implements Runnable, KeyListener {
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
         if (keyCode == 37) {
-            // orange.dx = 0;
             Yellow.left = false;
         } //left
         if (keyCode == 39) {
-            // orange.dx=0;
             Yellow.right = false;
         } //right
 

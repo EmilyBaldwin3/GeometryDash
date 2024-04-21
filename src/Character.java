@@ -2,7 +2,6 @@ import java.awt.*;
 public class Character {
     public int xpos;
     public int ypos;
-    public boolean isAlive;
     public int height = 90;
     public int width = 90;
     public String name = "Yellow";
@@ -27,11 +26,7 @@ public class Character {
 
 
         /**These are controlling movement based on key listener booleans*/
-//        if (up == true) {
-//            ypos = ypos - dy;
-//        } else if (down == true){
-//            ypos = ypos + dy;
-//        }
+
         if (right == true){
             xpos = xpos + dx;
         } else if (left == true){
@@ -39,13 +34,7 @@ public class Character {
         }
 
         /**These are keeping the object on the screen by bouncing off the walls */
-//        if (ypos < 0) {
-//            dy=-dy;
-//        }
-//        //bottom
-//        if (ypos > 700-height) {
-//            dy=-dy;
-//        }
+
         //right side
         if (xpos < 0) {
            dx=-dx;

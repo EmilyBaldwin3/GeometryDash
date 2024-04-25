@@ -26,12 +26,8 @@ public class testing implements Runnable, KeyListener {
     // booleans for game restart
     public boolean gamePlaying = false;
     public boolean gameOver = false;
-    public boolean isPaused = false;
-
     public Character Yellow; // main character for the game
     public Image BackgroundImage;
-    public Image SquareImage;
-    public Image TriangleImage;
     public Image YellowImage2;
     /**
      * step 1 for squares array
@@ -48,7 +44,7 @@ public class testing implements Runnable, KeyListener {
     public static void main(String[] args) {
         // BasicGame GeometryDash; // creates a new instance of the game
         testing geometryDash = new testing();
-        new Thread(geometryDash).start(); // creates a thread and starts uo he code in the run method
+        new Thread(geometryDash).start(); // creates a thread and starts up the code in the run method
     }
 
     public testing() {
@@ -94,7 +90,6 @@ public class testing implements Runnable, KeyListener {
             for (int y = 0; y < squares.length; y++) {
                 if (triangles[x].rec.intersects(squares[y].rec)) {
                     triangles[x].isAlive = false;
-                    // squares[y].isAlive = true;
                 }
             }
         }

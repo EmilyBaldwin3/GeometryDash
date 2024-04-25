@@ -1,4 +1,5 @@
 //Graphics Libraries
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,10 +8,9 @@ import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class BasicGame implements Runnable,KeyListener {
+public class BasicGame implements Runnable, KeyListener {
     //Variable Declaration Section
     //Declare the variables used in the program
-    //You can set their initial values too
 
     //Sets the width and height of the program window
     final int WIDTH = 1000;
@@ -23,27 +23,28 @@ public class BasicGame implements Runnable,KeyListener {
 
     public BufferStrategy bufferStrategy;
 
+    // booleans for game restart
+    public boolean gamePlaying = false;
+    public boolean gameOver = false;
     public Character Yellow; // main character for the game
     public Image BackgroundImage;
-    public Image SquareImage;
-    public Image TriangleImage;
     public Image YellowImage2;
-    // public Obstacle Square;
-    //  public Obstacle Triangle;
-    /***
+    /**
      * step 1 for squares array
-     * */
+     */
+
     public Obstacle[] squares;
     public Obstacle[] triangles;
     public SoundFile arcadeActionSound;
+    public SoundFile backgroundMusic;
+    public SoundFile youWinSound;
 
     // main method definition
     // this is the method that runs first and automatically
     public static void main(String[] args) {
         // BasicGame GeometryDash; // creates a new instance of the game
         BasicGame geometryDash = new BasicGame();
-
-        new Thread(geometryDash).start(); // creates a thread and starts uo he code in the run method
+        new Thread(geometryDash).start(); // creates a thread and starts up the code in the run method
     }
 
     public BasicGame() {
@@ -57,35 +58,48 @@ public class BasicGame implements Runnable,KeyListener {
 
         BackgroundImage = Toolkit.getDefaultToolkit().getImage("BackgroundImage.jpeg");
 
-        //  Triangle = new Obstacle("Triangle", 0, 600);
-        // TriangleImage = Toolkit.getDefaultToolkit().getImage("TriangleImage.png");
-        //  Square = new Obstacle("Square", 300, 600);
-        //  SquareImage = Toolkit.getDefaultToolkit().getImage("SquareImage.png");
 
-        /***
-         * Step 2 for the squares array: construct
-         * */
-        squares = new Obstacle [8];
-        triangles = new Obstacle [8];
-        /***
-         * Step 3 for the squares array: fill using a for loop
-         * */
-        for(int x=0;x<squares.length;x++){
-            squares[x] = new Obstacle ("squares",x*400,600);
-            squares[x].pic = Toolkit.getDefaultToolkit().getImage("SquareImage.png");
-        }
-        for(int x=0;x<triangles.length;x++){
-            triangles[x] = new Obstacle ("triangles",x*1000,600);
-            triangles[x].pic = Toolkit.getDefaultToolkit().getImage("TriangleImage.png");
-        }
+/**
+ * Step 2 for the squares array: construct
+ */
+
+        squares = new Obstacle[8];
+        triangles = new Obstacle[8];
+/**
+ * Step 3 for the squares array: fill using a for loop
+ */
+
+        placeObstacles();
+
         arcadeActionSound = new SoundFile("Arcade Action .wav");
+        backgroundMusic = new SoundFile("backgroundMusic.wav");
+        youWinSound = new SoundFile("youWinSound.wav");
+
 
         canvas.addKeyListener(this);
     }
 
+    public void placeObstacles() {
+        for (int x = 0; x < squares.length; x++) {
+            squares[x] = new Obstacle("squares", x * 600 + (int) (Math.random() * 800 + 800), 600);
+            squares[x].pic = Toolkit.getDefaultToolkit().getImage("SquareImage.png");
+        }
+        for (int x = 0; x < triangles.length; x++) {
+            triangles[x] = new Obstacle("triangles", 825 + x * 600, 600);
+            triangles[x].pic = Toolkit.getDefaultToolkit().getImage("TriangleImage.png");
+            for (int y = 0; y < squares.length; y++) {
+                if (triangles[x].rec.intersects(squares[y].rec)) {
+                    triangles[x].isAlive = false;
+                }
+            }
+        }
+    }
+
     public void run() {
         while (true) {
+
             moveThings(); //move all the game objects
+
             collisions();
             render(); // paint the graphics
             pause(10); // sleep for 10 ms
@@ -93,19 +107,28 @@ public class BasicGame implements Runnable,KeyListener {
     }
 
     public void moveThings() {
-        Yellow.move();
-        // Square.wrap();
-        // Triangle.wrap();
-        for (int x=0; x<=7;x++){
-            if (squares[x].isAlive == true){
-                squares[x].wrap();
+        if (gamePlaying == true) {
+            Yellow.move();
+            // Square.wrap();
+            // Triangle.wrap();
+            for (int x = 0; x <= 7; x++) {
+                if (squares[x].isAlive == true) {
+
+                    squares[x].wrap();
+                }
+            }
+            for (int x = 0; x <= 7; x++) {
+                if (triangles[x].isAlive == true) {
+
+                    triangles[x].wrap();
+                }
             }
         }
-        for (int x=0; x<=7;x++){
-            if (triangles[x].isAlive == true){
-                triangles[x].wrap();
-            }
+        if (Yellow.points >= 5) {
+            backgroundMusic.pause();
+            youWinSound.loop();
         }
+
     }
 
 
@@ -113,38 +136,73 @@ public class BasicGame implements Runnable,KeyListener {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
-        //draw the images
-        g.drawImage(BackgroundImage, 0,0,WIDTH,HEIGHT,null);
-        g.drawImage(YellowImage2,Yellow.xpos,Yellow.ypos,Yellow.width,Yellow.height,null);
+        if (gamePlaying == false) {
+            // game instructions
+            //"press space bar to begin"
+            g.setColor(Color.yellow);
+            g.fillRect(0, 0, WIDTH, HEIGHT);
+            g.setColor(Color.red);
+            g.setFont(new Font("Times Roman", Font.BOLD, 60));
+            g.drawString("Press Spacebar to Begin", 120, 350);
+            g.setColor(Color.blue);
+            g.drawRect(300, 450, 400, 150);
+            g.setFont(new Font("Georgia", Font.BOLD, 14));
+            g.drawString("RULES/HOW TO PLAY: press SPACE BAR to JUMP", 310, 490);
+            g.drawString("(press 2x to jump higher), AVOID triangles,", 310, 510);
+            g.drawString("LAND ON 5 squares to WIN!!", 310, 530);
+            g.setFont(new Font("Georgia", Font.BOLD, 20));
+            g.drawString("VOLUME ON!", 420, 580);
+        } // start screen
 
-        g.setColor(Color.blue);
-        g.drawRect(Yellow.rec.x,Yellow.rec.y,Yellow.rec.width,Yellow.rec.height);
+        else if (gamePlaying == true && gameOver == false) {
 
-        for (int x=0; x<=7;x++){
-            if (squares[x].isAlive == true){
-                g.drawImage(squares[x].pic,squares[x].xpos, squares[x].ypos,squares[x].width,squares[x].height,null);
+            //draw the images
+            g.drawImage(BackgroundImage, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage(YellowImage2, Yellow.xpos, Yellow.ypos, Yellow.width, Yellow.height, null);
+
+            g.setColor(Color.blue);
+            g.drawRect(Yellow.rec.x, Yellow.rec.y, Yellow.rec.width, Yellow.rec.height);
+
+            for (int x = 0; x < squares.length; x++) {
+                if (squares[x].isAlive == true) {
+                    g.drawImage(squares[x].pic, squares[x].xpos, squares[x].ypos, squares[x].width, squares[x].height, null);
+                }
             }
-        }
-        for (int x=0; x<=7;x++){
-            if (squares[x].isAlive == true){
-                g.setColor(Color.green);
-                g.drawRect(squares[x].rec.x,squares[x].rec.y,squares[x].rec.width,squares[x].rec.height);
-            }
-        }
-        for (int x=0; x<=7;x++) {
-            if (triangles[x].isAlive == true) {
-                g.drawImage(triangles[x].pic, triangles[x].xpos, triangles[x].ypos, triangles[x].width, triangles[x].height, null);
-            }
-        }
-        for (int x=0; x<=7;x++){
-            if (triangles[x].isAlive == true){
-                g.setColor(Color.green);
-                g.drawRect(triangles[x].rec.x,triangles[x].rec.y,triangles[x].rec.width,triangles[x].rec.height);
-            }
-        }
+            for (int x = 0; x < squares.length; x++) {
+                if (squares[x].isAlive == true) {
+                    g.setColor(Color.green);
+                    g.drawRect(squares[x].rec.x, squares[x].rec.y, squares[x].rec.width, squares[x].rec.height);
 
 
+                }
+            }
+            for (int x = 0; x < triangles.length; x++) {
+                if (triangles[x].isAlive == true) {
+                    g.drawImage(triangles[x].pic, triangles[x].xpos, triangles[x].ypos, triangles[x].width, triangles[x].height, null);
+                }
+            }
+            for (int x = 0; x < triangles.length; x++) {
+                if (triangles[x].isAlive == true) {
+                    g.setColor(Color.green);
+                    g.drawRect(triangles[x].rec.x, triangles[x].rec.y, triangles[x].rec.width, triangles[x].rec.height);
+                }
+            }
 
+            g.setColor(Color.black);
+            g.setFont(new Font("Times New Roman", Font.BOLD, 25));
+            g.drawString("Square Points: " + Yellow.points, 650, 100);
+            // tally point keeper on screen
+
+        } // game play - what I currently have in my render
+
+        else if (gameOver == true) {
+            g.setColor(Color.green);
+            g.fillRect(0, 0, WIDTH, HEIGHT);
+            g.setColor(Color.yellow);
+            g.setFont(new Font("Times Roman", Font.BOLD, 40));
+            g.drawString("You WIN Game Over", 100, 350);
+
+        } // you won screen
 
 
         g.dispose();
@@ -152,25 +210,41 @@ public class BasicGame implements Runnable,KeyListener {
     }
 
     public void collisions() {
-        for (int x = 0; x < triangles.length; x++) {
-            if (Yellow.rec.intersects(triangles[x].rec)) {
-                Yellow.xpos = 0;
-                arcadeActionSound.play();
-            } // how do I make this work for when the character lands on top of the triangle and how do i make this intersection only happen once
-        }
-        for (int x = 0; x < squares.length; x++){
-            if (Yellow.rec.intersects(squares[x].rec)){
-                Yellow.ypos=squares[x].ypos -90;
-            } // how do I make my character jump / have gravity?
-        }
-        for (int x = 0; x < squares.length; x++) {
-            if(squares[x].rec.intersects(triangles[x].rec)){
-                triangles[x].isAlive = false;
+        if (gamePlaying == true && gameOver ==false) {
+            for (int x = 0; x < triangles.length; x++) {
+                if (Yellow.rec.intersects(triangles[x].rec) && triangles[x].isAlive == true) {
+                    Yellow.points = 0;
+                    placeObstacles();
+
+                    arcadeActionSound.play();
+
+                }
             }
-        } // how do I get this to work . . . for the triangles to not show up if a square is already there
+            for (int x = 0; x < squares.length; x++) {
+                if (Yellow.rec.intersects(squares[x].rec)) {
+                    Yellow.ypos = squares[x].ypos - 90;
+                    Yellow.rec.y = squares[x].ypos - 90;
+                    if (squares[x].hasBeenTouched == false) {
+                        Yellow.points++;
+                        System.out.println("Point!");
+                        squares[x].hasBeenTouched = true;
+                    }
+                    if (Yellow.points >= 5) {
+                        gameOver = true;
+                        //gamePlaying = false;
+                    } // win detection
+                    System.out.println("yellow points: " + Yellow.points);
+                }
+            }
+            for (int x = 0; x < squares.length; x++) {
+                if (squares[x].rec.intersects(triangles[x].rec)) {
+                    triangles[x].isAlive = false;
+                }
+            }
+        }
     }
 
-    public void pause(int time ) { // ** never have to edit **
+    public void pause(int time) { // ** never have to edit **
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
@@ -218,19 +292,14 @@ public class BasicGame implements Runnable,KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
-        if (keyCode == 38) {
-            Yellow.up = true;
-        } //up
-        if (keyCode == 40) {
-            Yellow.down = true;
-        }//down
-        if (keyCode == 37) {
-            Yellow.left = true;
-
-        } //left
-        if (keyCode == 39) {
-            Yellow.right = true;
-        } //right
+        if (gamePlaying == false && keyCode == 32) {
+            gamePlaying = true;
+            backgroundMusic.loop();
+        }
+        if (keyCode == 32 && Yellow.jumps < 3) { // space bar
+            Yellow.dy = -20;
+            Yellow.jumps++;
+        }
     }
 
     @Override
@@ -239,23 +308,14 @@ public class BasicGame implements Runnable,KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key pressed: " + key + ", Keycode is: " + keyCode);
 
-        if (keyCode == 38) {
-            //orange.dy=0;
-            Yellow.up = false;
-        } //up
-        if (keyCode == 40) {
-            // orange.dy=0;
-            Yellow.down = false;
-        }//down
         if (keyCode == 37) {
-            // orange.dx = 0;
             Yellow.left = false;
         } //left
         if (keyCode == 39) {
-            // orange.dx=0;
             Yellow.right = false;
         } //right
 
 
     }
+
 }
